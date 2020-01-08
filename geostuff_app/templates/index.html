@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Vue-js | Django | Crud App</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple crud app made with the vue js and django">
+    <meta name="keywords" content="vuejs, django, crudapp, restapi">
+
+    	 {% load static %}
+    {% load staticfiles %}
+    {% load static from staticfiles %}
+
+<!--     — bootstap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <!-- — boostrap css -->
+<!--    <style>-->
+<!--	body { margin: 0; padding: 0; }-->
+<!--	#map { position: absolute; top: 0; bottom: 0; width: 100%; };-->
+<!--    </style>-->
+
+
+
+</head>
+
+<body>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+<!-- Mapbox files -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet'/>
+
+<!-- vue.js files -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>
+
+<div id='map' style='width:100%; height: 800px;'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia3J5c3MiLCJhIjoiY2llc3g5cmV0MDBjb3U4bTBtMmx5M2YxdCJ9.U1RDNZuFsEP38rD9EQRZqw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+    });
+
+    map.on('load', function () {
+        map.addSource('some id', {
+            type: 'geojson',
+            data: 'http://localhost:8000/api/v1/steps/?format=json'
+        });
+
+        map.addLayer({
+        "id": "some id",
+        "type": "symbol",
+        "source": "some id",
+        "layout": {
+            'icon-image': 'rocket-15'
+        }
+    });
+
+    })
+</script>
+
+</body>
+</html>

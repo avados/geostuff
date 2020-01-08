@@ -16,8 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from rest_framework import routers
+from geostuff_app import views
+from django.views.generic import TemplateView
+
+#router generate a list view and a detail view with a pk
+router = routers.DefaultRouter()
+router.register(r'steps', views.StepsViewSet)
+router.register(r'm', views.MapsViewSet)
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
     url(r'^api-auth/', include('rest_framework.urls')),
 ]
